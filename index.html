@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+    <title>Color Scheme Generator</title>
+</head>
+<body>
+    <div id="generator">
+        <div id="header-container">
+            <h1 id="main-header">Color Scheme Generator</h1>
+            <h4 id="" class="">Explanitory text about this project</h4>
+        </div>
+        <div id="input-container">
+            <div id="instruction-container">
+                <h3>Instructions for use</h3>
+                <p>Detailed instructions go here. </p>
+                <h3>Color Schemes</h3>
+                <h4>Here are the different color schemes available with a short description</h4>
+                <ul>
+                    <li>Monochrome: </li>
+                    <li>Monochrome-Dark: </li>
+                    <li>Analogous: </li>
+                    <li>Complementary: </li>
+                    <li>Triadic: </li>
+                    <li>Quad: </li>
+                </ul>
+            </div>
+            <div id="color-input">
+                <label for="color-input">Please select your main color</label>
+                <input type="color" id="color-input" name="color-input"></input>
+            </div>
+            <div id="scheme-input">
+                <label for="scheme-input">Please select a scheme</label>
+                <select id="scheme-input" name="scheme-input">
+                    <option value="monochrome">Monochrome</option>
+                    <option value="monochrome-dark">Monochrome-Dark</option>
+                    <option value="analogous">Analogous</option>
+                    <option value="complementary">Complementary</option>
+                    <option value="triadic">Triadic</option>
+                    <option value="quad">Quad</option>
+                </select>
+                <button id="input-button">Generate Scheme</button>
+            </div>
+        </div>
+        <div id="output-container">
+            <div id="selected-color" class="scheme-output">
+                <p id="main-color-text" class="output-text" >Main Color</p>
+            </div>
+            <div id="output-color2" class="scheme-output">
+                <p id="output-color2-text" class="output-text"></p>
+            </div>
+            <div id="color3" class="scheme-output">
+                <p id="color3-text" class="output-text"></p>
+            </div>
+            <div id="ouput-color4" class="scheme-output">
+                <p id="output-color4-text" class="output-text"></p>
+            </div>
+            <div id="" class="scheme-output"></div>
+            <div id="" class="scheme-output"></div>
+        </div>
+    </div>
+</body>
+</html>
