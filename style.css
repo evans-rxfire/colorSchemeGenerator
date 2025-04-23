@@ -3,9 +3,26 @@ body {
     padding: 0;
 }
 
+#generator {
+    padding: 10px;
+    margin-left: 20px;
+}
+
+#output-container {
+    display: flex;
+}
+
 .scheme-output {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
+    box-sizing: border-box;
     border: solid 1px black;
     border-radius: 2px;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.output-text, .output-hex {
+    text-align: center;
+    
 }
