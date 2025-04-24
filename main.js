@@ -3,6 +3,20 @@ const schemeChoice = document.getElementById("scheme-choice");
 const generateButton = document.getElementById("input-button");
 
 
+function hexToRgb(hex) {
+    hex = hex.replace(/^#/, '');
+    if (hex.length === 3) {
+        hex = hex.split('').map(char => char + char).join('');
+    }
+
+    const bigint = parseInt(hex, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+
+    return [r, g, b];
+}
+
 function updateColorBlock(elementIdPrefix, colorName, hexCode) {
     
     const block = document.getElementById(elementIdPrefix);
@@ -12,10 +26,17 @@ function updateColorBlock(elementIdPrefix, colorName, hexCode) {
         block.style.backgroundColor = hexCode;
 
         const nameText = document.getElementById(`${elementIdPrefix}-text`);
-        nameText.textContent = colorName;
-
         const hexText = document.getElementById(`${elementIdPrefix}-hex`);
+
+        nameText.textContent = colorName;
         hexText.textContent = hexCode;
+
+        const [r, g, b] = hexToRgb(hexCode);
+        const brightness = Math.round((r * 299 + g * 587 + b * 114) / 1000);
+        const textColor = brightness < 150 ? 'white' : 'black';
+
+        nameText.style.color = textColor;
+        hexText.style.color = textColor;
     } else {
         console.error(`Element with id ${elementIdPrefix} not found.`);
     }
