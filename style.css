@@ -22,6 +22,10 @@ body {
     margin: 5px;
 }
 
+#selected-color {
+    border: solid 5px black;
+}
+
 .output-text, .output-hex {
     text-align: center;
     
