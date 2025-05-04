@@ -42,29 +42,31 @@ function updateColorBlock(elementIdPrefix, colorName, hexCode) {
     }
 }
 
-
-generateButton.addEventListener("click", () => {
-    const hex = colorChoice.value.substring(1);
+function generateColorScheme() {
+    const hex = colorChoice.value.substring(1); // remove '#' for API
     const scheme = schemeChoice.value;
-
     const url = `https://www.thecolorapi.com/scheme?hex=${hex}&mode=${scheme}&count=4`;
 
+    generateButton.disabled = true; // Disable the button while fetching
+
     fetch(url)
-    .then(res => {
-        if (!res.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return res.json();
-    })
-    .then(data => {
-        console.log("API Response:", data);
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("API Response:", data);
 
-        if (data.colors && data.colors.length > 0) {
-            const mainColorName = data.seed.name.value;
-            updateColorBlock("selected-color", mainColorName, `#${hex}`);
+            // Update the selected color block with name from API
+            const selectedColorName = data.seed.name.value;
+            const selectedColorHex = `#${hex}`; // Use the original hex with '#'
 
+            updateColorBlock("selected-color", selectedColorName, selectedColorHex);
+
+            // Fill the 4 output blocks with the rest of the scheme colors
             const colors = data.colors;
-
             for (let i = 0; i < 4; i++) {
                 const color = colors[i];
                 updateColorBlock(
@@ -73,13 +75,14 @@ generateButton.addEventListener("click", () => {
                     color.hex.value
                 );
             }
-        } else {
-            console.error("No colors in the response:", data);
-            alert("Something went wrong, please try again.");
-        }
-    })
-    .catch(error => {
-        console.error("Error fetching color scheme:", error);
-        alert("There was an issue fetching the color scheme. Please try again.");
-    });
-});
+        })
+        .catch(error => {
+            console.error("Error fetching color scheme:", error);
+        })
+        .finally(() => {
+            generateButton.disabled = false; // Re-enable the button
+        });
+}
+
+
+generateButton.addEventListener("click", generateColorScheme);
